@@ -62,7 +62,7 @@
         <td th:text="${user.lastName}">lastName</td>
         <td th:text="${user.age}">age</td>
         <td th:text="${user.email}">email</td>
-        <td><form th:method="get" th:action="@{{id}/edit(id=${user.id})}">
+        <td><form th:method="get" th:action="@{{id}/edit-user(id=${user.id})}">
             <input type="submit" value="Edit"></form></td>
         <td><form th:method="delete" th:action="@{/{id}(id=${user.id})}">
             <input type="submit" value="Delete"></form></td>

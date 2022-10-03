@@ -23,35 +23,35 @@ public class UsersController {
     @GetMapping("/")
     public String showAllUsers(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
-        return "index";
+        return "allUsers";
     }
 
     @GetMapping("/add-new-user")
     public String getNewUserForm (Model model) {
         model.addAttribute("newUser", new User());
-        return "newUser";
+        return "addUserForm";
     }
 
     @PostMapping()
     public String addNewUser(@ModelAttribute("newUser") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "newUser";
+            return "addUserForm";
         }
         userService.addUser(user);
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/{id}/edit-user")
     public String getEditUserForm(Model model, @PathVariable("id") int id) {
         model.addAttribute("editUser", userService.getUserById(id));
-        return "/edit";
+        return "/editUserForm";
     }
 
     @PatchMapping("/{id}")
     public String editUser(@ModelAttribute("editUser") @Valid User user, BindingResult bindingResult,
                                  @PathVariable("id") int id) {
         if (bindingResult.hasErrors()) {
-            return "/edit";
+            return "/editUserForm";
         }
         userService.editUser(user, id);
         return "redirect:/";
